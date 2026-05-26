@@ -1,0 +1,131 @@
+int trigFront = 10;
+int echoFront = 11;
+
+int trigLeft = 13;
+int echoLeft = 12;
+
+int trigRight = 8;
+int echoRight = 9;
+
+int redPin = 4;
+int greenPin = 5;
+int bluePin = 6;
+
+int buzzerPin = 3;
+
+long durationFront, durationLeft, durationRight;
+int distanceFront, distanceLeft, distanceRight;
+
+void setup() {
+Serial.begin(9600);
+
+pinMode(trigFront, OUTPUT);
+pinMode(echoFront, INPUT);
+
+pinMode(trigRight, OUTPUT);
+pinMode(echoRight, INPUT);
+
+pinMode(trigLeft, OUTPUT);
+pinMode(echoLeft, INPUT);
+
+pinMode(redPin, OUTPUT);
+pinMode(greenPin, OUTPUT);
+
+pinMode(bluePin, OUTPUT);
+
+pinMode(buzzerPin,OUTPUT);
+}
+
+void loop() {
+
+if (distanceFront &lt; 100 or distanceRight &lt; 100 or distanceLeft &lt;
+100){
+digitalWrite(buzzerPin,HIGH);
+}
+else {
+digitalWrite(buzzerPin,LOW);
+}
+
+if (distanceFront &lt; 100) {
+digitalWrite(redPin, HIGH);
+digitalWrite(greenPin, LOW);
+digitalWrite(bluePin, LOW);
+delay(200);
+
+digitalWrite(redPin, LOW);
+
+}
+else if (distanceRight &lt; 50) {
+digitalWrite(redPin, LOW);
+digitalWrite(greenPin, HIGH);
+digitalWrite(bluePin, LOW);
+delay(200);
+
+digitalWrite(greenPin, LOW);
+
+}
+
+else if (distanceLeft &gt; 20 and distanceLeft &lt; 40) {
+digitalWrite(redPin, LOW);
+digitalWrite(greenPin, LOW);
+digitalWrite(bluePin, HIGH);
+delay(200);
+
+digitalWrite(bluePin, LOW);
+
+}
+
+else {
+digitalWrite(redPin, LOW);
+digitalWrite(greenPin, LOW);
+digitalWrite(bluePin, LOW);
+}
+
+// FRONT SENSOR
+digitalWrite(trigFront, LOW);
+delayMicroseconds(2);
+digitalWrite(trigFront, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigFront, LOW);
+
+durationFront = pulseIn(echoFront, HIGH);
+distanceFront = durationFront * 0.034 / 2;
+
+Serial.print(&quot;Distance Front: &quot;);
+Serial.print(distanceFront);
+Serial.println(&quot; cm&quot;);
+
+delay(500);
+
+// RIGHT SENSOR
+digitalWrite(trigRight, LOW);
+delayMicroseconds(2);
+digitalWrite(trigRight, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigRight, LOW);
+
+durationRight = pulseIn(echoRight, HIGH);
+distanceRight = durationRight * 0.034 / 2;
+
+Serial.print(&quot;Distance Right: &quot;);
+Serial.print(distanceRight);
+Serial.println(&quot; cm&quot;);
+
+delay(500);
+
+// LEFT SENSOR
+digitalWrite(trigLeft, LOW);
+delayMicroseconds(2);
+digitalWrite(trigLeft, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigLeft, LOW);
+
+durationLeft = pulseIn(echoLeft, HIGH);
+distanceLeft = durationLeft * 0.034 / 2;
+
+Serial.print(&quot;Distance Left: &quot;);
+Serial.print(distanceLeft);
+Serial.println(&quot; cm&quot;);
+
+delay(500);
+}
