@@ -55,4 +55,8 @@ The biggest challenge was debugging the logic for multiple sensors and understan
 - Add LCD display for real-time distance output  
 - Integrate IoT module (ESP32/WiFi)  
 - Improve accuracy with calibration  
-- Convert into physical hardware prototype  
+- Convert into physical hardware prototype
+
+## Project Links
+
+- GitHub Repository: https://github.com/Siddhant981/ultrasonic-obstacle-detection-system.
